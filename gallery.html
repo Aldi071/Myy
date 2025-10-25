@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Spesial - Kenangan Kita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fef7f7 0%, #f9f2f2 100%);
+            overflow-x: hidden;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(45deg, #d4a574, #e8b4b8, #d4a574);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .memory-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 180, 184, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 165, 116, 0.2);
+        }
+        
+        .floating-heart {
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 180, 184, 0.3);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <button class="back-button rounded-full p-3" onclick="window.history.back()">
+        <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="floating-heart mb-8">
+                <svg class="w-20 h-20 mx-auto text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-6 fade-in">
+                Gallery Spesial Kita
+            </h1>
+            
+            <p class="text-xl text-gray-600 mb-12 fade-in" style="animation-delay: 0.3s;">
+                Kumpulan momen indah yang tak terlupakan
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gallery Item 1 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/wallpapers.com/6034541a45c1f8e965c031d8b42792038b0343dd.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/wallpapers.com/6034541a45c1f8e965c031d8b42792038b0343dd.jpg" alt="Memory 1" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Senja Pertama</h3>
+                        <p class="text-gray-600">Momen pertama kita menonton sunset bersama</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 0.2s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/render.fineartamerica.com/1beda89a757975ab9de2ee61ae233bae7830c6fd.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/render.fineartamerica.com/1beda89a757975ab9de2ee61ae233bae7830c6fd.jpg" alt="Memory 2" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Pelukan Hangat</h3>
+                        <p class="text-gray-600">Saat dingin malam menghangat dengan pelukanmu</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 0.4s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/www.startofhappiness.com/4e3c93721934f255ec793d88b4ae7a317a21cc94.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.startofhappiness.com/4e3c93721934f255ec793d88b4ae7a317a21cc94.jpg" alt="Memory 3" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Tawa Ceria</h3>
+                        <p class="text-gray-600">Ketika candaanmu membuatku tertawa lepas</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 0.6s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/3d1dbeef350224646fb8db36b4c52548401833bf.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/3d1dbeef350224646fb8db36b4c52548401833bf.jpg" alt="Memory 4" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Momen Romantis</h3>
+                        <p class="text-gray-600">Saat mata kita bertemu dan dunia berhenti</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 0.8s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/i.pinimg.com/6155ea96d7c240c38e3c31bdfb1447da48be3028.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i.pinimg.com/6155ea96d7c240c38e3c31bdfb1447da48be3028.jpg" alt="Memory 5" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Cinta Sejati</h3>
+                        <p class="text-gray-600">Bukti bahwa cinta kita nyata dan abadi</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 1s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/wallpaper.dog/fe839e5b1eb174a99415d579c6e6112ae1711212.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/wallpaper.dog/fe839e5b1eb174a99415d579c6e6112ae1711212.jpg" alt="Memory 6" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Kenangan Manis</h3>
+                        <p class="text-gray-600">Setiap detik denganmu adalah hadiah terindah</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 1.2s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/i.pinimg.com/084363448fffd222397248f77c17bb1339133bbe.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/i.pinimg.com/084363448fffd222397248f77c17bb1339133bbe.jpg" alt="Memory 7" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Senja Romantis</h3>
+                        <p class="text-gray-600">Saat langit berwarna jingga seperti cinta kita</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 1.4s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/wallpapers.com/67fe9f4dd4dad4edb6c0d1fea6f6738f8852ca71.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/wallpapers.com/67fe9f4dd4dad4edb6c0d1fea6f6738f8852ca71.jpg" alt="Memory 8" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Kopi Pagi</h3>
+                        <p class="text-gray-600">Satu cangkir, dua hati yang saling mencinta</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 9 -->
+                <div class="memory-card rounded-2xl overflow-hidden fade-in" style="animation-delay: 1.6s;" onclick="openLightbox('https://kimi-web-img.moonshot.cn/img/mrwallpaper.com/ca032b2adefd7e2f3365c64437b1d2f99e4053a7.jpg')">
+                    <img src="https://kimi-web-img.moonshot.cn/img/mrwallpaper.com/ca032b2adefd7e2f3365c64437b1d2f99e4053a7.jpg" alt="Memory 9" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2" style="color: #d4a574;">Tawa dan Tangis</h3>
+                        <p class="text-gray-600">Bersama kita menghadapi semua dengan cinta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImage" src="" alt="Gallery Image">
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="floating-heart mb-6">
+                <svg class="w-12 h-12 mx-auto text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="text-gray-600 text-lg">
+                Dibuat dengan ❤️ untuk orang yang paling kusayangi
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                © 2024 Kenangan Kita - Gallery Spesial
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Lightbox functions
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

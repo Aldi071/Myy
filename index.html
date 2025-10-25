@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fef7f7 0%, #f9f2f2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .flower-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .flower {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(45deg, #e8b4b8, #d4a574);
+            border-radius: 50% 50% 50% 0;
+            transform-origin: bottom right;
+            opacity: 0;
+            animation: bloom 2s ease-out forwards;
+        }
+        
+        .petal:nth-child(1) {
+            top: 10px;
+            left: 50px;
+            transform: rotate(0deg);
+            animation-delay: 0.2s;
+        }
+        
+        .petal:nth-child(2) {
+            top: 30px;
+            left: 70px;
+            transform: rotate(72deg);
+            animation-delay: 0.4s;
+        }
+        
+        .petal:nth-child(3) {
+            top: 60px;
+            left: 60px;
+            transform: rotate(144deg);
+            animation-delay: 0.6s;
+        }
+        
+        .petal:nth-child(4) {
+            top: 60px;
+            left: 30px;
+            transform: rotate(216deg);
+            animation-delay: 0.8s;
+        }
+        
+        .petal:nth-child(5) {
+            top: 30px;
+            left: 20px;
+            transform: rotate(288deg);
+            animation-delay: 1s;
+        }
+        
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: #d4a574;
+            border-radius: 50%;
+            opacity: 0;
+            animation: showCenter 0.5s ease-out 1.5s forwards;
+        }
+        
+        @keyframes bloom {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(var(--rotation, 0deg));
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(var(--rotation, 0deg));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(var(--rotation, 0deg));
+            }
+        }
+        
+        @keyframes showCenter {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .loading-text {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4a574;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 2s forwards;
+        }
+        
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 1s ease-out 3.5s forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flower-container fade-out" id="loadingScreen">
+        <div class="flower">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+        <div class="loading-text">Membuka kenangan indah...</div>
+    </div>
+
+    <script>
+        // Redirect to main page after animation
+        setTimeout(() => {
+            window.location.href = 'mainn.html';
+        }, 4500);
+    </script>
+</body>
+</html>
